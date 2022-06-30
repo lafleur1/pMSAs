@@ -1,4 +1,5 @@
-# paired multile sequence alignments (pMSAs)
+# paired multiple sequence alignments (pMSAs)
+-------------------------------------------------
 Summary: 
 
 Attempting simple paired MSA generation for eukaryotes using OMA DB to feed into RoseTTAFold for complex prediction 
@@ -6,7 +7,7 @@ Attempting simple paired MSA generation for eukaryotes using OMA DB to feed into
 (Based off of the RoseTTAfold pMSA process for yeast, modified to use OMA DB, and trying to make a isoform-specific pMSA generation process ) 
 
 -------------------------------------------------
-|1st, prepare each member of the heterocomplex: |
+1st, prepare each member of the heterocomplex: 
 -------------------------------------------------
 
 Run for each complex member 
@@ -42,8 +43,8 @@ Run for each complex member
   c) Download and parse OMA DB proteomes for all species (TODO)
  ---------------------------------------------------------
  
- --------------
- |MSA pairing:|
+
+ MSA pairing:
  --------------
  1) For each species: 
   a) Concatenate the wt sequences as the first line
