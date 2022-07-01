@@ -58,9 +58,9 @@ Run for each complex member
  
  Computing pMSAs for septin-12 interactions with septin 1, septin1 splice variant, and septin 5. 
  
- % Seq ID for longest alignments with pBLAST: 
+
  
-| | S1 | S1DS | S5 | S12|
+| % Seq ID| S1 | S1DS | S5 | S12|
 | ------------- | ------------- | -------- |-------- |
 |S1 | - | 100 | 63 | 45 |
 | S1DS| 100 | - | 63 | 45|
