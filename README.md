@@ -67,3 +67,12 @@ Run for each complex member
 | S5| 64 | 64 | - | 46|
 | S12| 45 | 45 | 46 | -|
   
+
+Filtering out paralogs from orthologs from OMA db for all proteins: 
+
+| Protein       |# orthologs | # paralogs| # filtered orthologs |
+| ------------- | ------------- | -------- |-------- |
+| S1   | 1003   | 2123 | 1003 | 
+| S5   | 1143  | 2060  | 1066  | 
+| S12  | 1034  | 2126  | 995 | 
+
