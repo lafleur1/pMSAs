@@ -1,17 +1,16 @@
 # paired multiple sequence alignments (pMSAs)
--------------------------------------------------
+
 Summary: 
 
 Attempting simple paired MSA generation for eukaryotes using OMA DB to feed into RoseTTAFold for complex prediction 
 
 (Based off of the RoseTTAfold pMSA process for yeast, modified to use OMA DB, and trying to make a isoform-specific pMSA generation process ) 
 
--------------------------------------------------
 1st, prepare each member of the heterocomplex: 
--------------------------------------------------
+
 
 Run for each complex member 
----------------------------------------------------------
+
 1) Download both orthologs and paralogs from OMA for the target (TODO: update this to pull from OMA with their python API)
   a) Keep difference of set of ortholog and paralog sequences 
   b) IF DOING A NON-CANNONICAL ISOFORM RUN THOSE STEPS NOW
@@ -26,9 +25,9 @@ Run for each complex member
   c) Run hmmbuild
   d) Run hmmlaign 
   e) Convert sto -> a3m 
- ---------------------------------------------------------
+
  For non-cannonical isoforms: (IN PROGRESS) 
- ---------------------------------------------------------
+
  Route 1: (Isoform re-BLAST and reselection)
  
  1) For every ortholog to the cannonical sequence, download any isoforms present 
@@ -41,11 +40,10 @@ Run for each complex member
   a) NCBI proteome downloads with entrex (TOO SLOW for more of species in test case)
   b) OMA DB proteome downloads (with API) (TOO SLOW for amount of species in test case)
   c) Download and parse OMA DB proteomes for all species (TODO)
- ---------------------------------------------------------
- 
+
 
  MSA pairing:
- --------------
+
  1) For each species: 
   a) Concatenate the wt sequences as the first line
   b) For all species following this: 
