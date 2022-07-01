@@ -1,17 +1,16 @@
 # paired multiple sequence alignments (pMSAs)
--------------------------------------------------
+
 Summary: 
 
 Attempting simple paired MSA generation for eukaryotes using OMA DB to feed into RoseTTAFold for complex prediction 
 
 (Based off of the RoseTTAfold pMSA process for yeast, modified to use OMA DB, and trying to make a isoform-specific pMSA generation process ) 
 
--------------------------------------------------
 1st, prepare each member of the heterocomplex: 
--------------------------------------------------
+
 
 Run for each complex member 
----------------------------------------------------------
+
 1) Download both orthologs and paralogs from OMA for the target (TODO: update this to pull from OMA with their python API)
   a) Keep difference of set of ortholog and paralog sequences 
   b) IF DOING A NON-CANNONICAL ISOFORM RUN THOSE STEPS NOW
@@ -26,9 +25,9 @@ Run for each complex member
   c) Run hmmbuild
   d) Run hmmlaign 
   e) Convert sto -> a3m 
- ---------------------------------------------------------
+
  For non-cannonical isoforms: (IN PROGRESS) 
- ---------------------------------------------------------
+
  Route 1: (Isoform re-BLAST and reselection)
  
  1) For every ortholog to the cannonical sequence, download any isoforms present 
@@ -41,11 +40,10 @@ Run for each complex member
   a) NCBI proteome downloads with entrex (TOO SLOW for more of species in test case)
   b) OMA DB proteome downloads (with API) (TOO SLOW for amount of species in test case)
   c) Download and parse OMA DB proteomes for all species (TODO)
- ---------------------------------------------------------
- 
+
 
  MSA pairing:
- --------------
+
  1) For each species: 
   a) Concatenate the wt sequences as the first line
   b) For all species following this: 
@@ -56,4 +54,25 @@ Run for each complex member
  
  TODO: figure out how to do the structural inputs.....
  
+ #Septin complexes 
+ 
+ Computing pMSAs for septin-12 interactions with septin 1, septin1 splice variant, and septin 5. 
+ 
+
+ 
+| % Seq ID| S1 | S1DS | S5 | S12
+| ------------- | ------------- | -------- |-------- |-------- |
+|S1 | - | 100 | 63 | 45 |
+| S1DS| 100 | - | 63 | 45|
+| S5| 64 | 64 | - | 46|
+| S12| 45 | 45 | 46 | -|
   
+
+Filtering out paralogs from orthologs from OMA db for all proteins: 
+
+| Protein       |# orthologs | # paralogs| # filtered orthologs |
+| ------------- | ------------- | -------- |-------- |
+| S1   | 1003   | 2123 | 1003 | 
+| S5   | 1143  | 2060  | 1066  | 
+| S12  | 1034  | 2126  | 995 | 
+
