@@ -54,4 +54,16 @@ Run for each complex member
  
  TODO: figure out how to do the structural inputs.....
  
+ #Septin complexes 
+ 
+ Computing pMSAs for septin-12 interactions with septin 1, septin1 splice variant, and septin 5. 
+ 
+ % Seq ID for longest alignments with pBLAST: 
+ 
+| | S1 | S1DS | S5 | S12|
+| ------------- | ------------- | -------- |-------- |
+|S1 | - | 100 | 63 | 45 |
+| S1DS| 100 | - | 63 | 45|
+| S5| 64 | 64 | - | 46|
+| S12| 45 | 45 | 46 | -|
   
