@@ -132,4 +132,4 @@ dmypy.json
 blastp_outputs/
 single_family_fastas/
 alignments/
-
+example_complex/
