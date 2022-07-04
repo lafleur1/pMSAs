@@ -131,4 +131,5 @@ dmypy.json
 #ignore intermediate fastas & blast results 
 blastp_outputs/
 single_family_fastas/
+alignments/
 
