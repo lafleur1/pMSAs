@@ -112,12 +112,31 @@ def generate_all_pmsa_pairs(project_name, project_name_2, complex_output_folder)
     for n in names:
         a3m_p1 = project_name + n
         a3m_p2 = project_name_2 + n
-        pmsa_name = n.replace('.a3m', 'paired.a3m')
+        pmsa_name = n.replace('.a3m', '_postfilter_paired.a3m')
+        #v1 - as suggested on rosettafold github, filter the paired msas
         construct_pmsa(a3m_p1, a3m_p2,  complex_output_folder + pmsa_name)
         #quality filter the msa
         quality_filter_with_hhfilter(complex_output_folder + pmsa_name)
         print ("-----------------------")
-
+        #v2 - filter the single msas, then pair
+        quality_filter_with_hhfilter(a3m_p1)
+        quality_filter_with_hhfilter(a3m_p2)
+        #make paired msas from the filtered alignments
+        for id in [90, 95, 99, 100]:
+            for cov in [75, 50, 35]:
+                new_name_p1 = a3m_p1.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_max_hhfilered.a3m')
+                new_name_p2 = a3m_p2.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_max_hhfilered.a3m')
+                #make a new pMSA
+                pmsa_name = n.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_maxhh_prefilter_paired.a3m')
+                construct_pmsa(new_name_p1, new_name_p2, complex_output_folder + pmsa_name)
+                new_name_p1_minfil = a3m_p1.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_min40_hhfilered.a3m')
+                new_name_p2_minfil = a3m_p2.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_min40_hhfilered.a3m')
+                pmsa_name = n.replace('.a3m', '_id' + str(id) + '_cov' + str(cov) + '_min40quidhh_prefilter_paired.a3m')
+                construct_pmsa(new_name_p1_minfil, new_name_p2_minfil, complex_output_folder + pmsa_name)
+        new_name_p1 = a3m_p1.replace('.a3m', '_min40idmin35gap_hhfilered.a3m')
+        new_name_p2 = a3m_p2.replace('.a3m', '_min40idmin35gap_hhfilered.a3m')
+        pmsa_name = n.replace('.a3m', '_min40idmin35gap_prefilter_paired.a3m')
+        construct_pmsa(new_name_p1, new_name_p2, complex_output_folder + pmsa_name)
 
 
 def quality_filter_with_hhfilter(a3m_path):

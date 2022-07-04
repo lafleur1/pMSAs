@@ -68,7 +68,7 @@ print ('Size db: ', filtered_sept1_orthodb.size)
 #2) filter by genome duplication issues - removing shorter orthologs from a species which align highly to a longer one
 fragmented_filtered_dict = genome_fragment_filter(filtered_sept1_orthodb)
 #save filtered db
-save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept1_retain_all.fasta')
+save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept1_retain_all.fasta', only_single = False)
 #print ("multi-alignment filter - check if it's an issue (if it is, implement this....")
 #region_merge_filter(fragmented_filtered_dict, fasta_dir + s1_filt_ortho)
 print ("-----------------------------")
@@ -97,7 +97,7 @@ print ('Size db: ', filtered_sept5_orthodb.size)
 #2) filter by genome duplication issues - removing shorter orthologs from a species which align highly to a longer one
 fragmented_filtered_dict = genome_fragment_filter(filtered_sept5_orthodb)
 #save filtered db
-save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept5_retain_all.fasta')
+save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept5_retain_all.fasta', only_single = False)
 #print ("multi-alignment filter - check if it's an issue (if it is, implement this....")
 #region_merge_filter(fragmented_filtered_dict, fasta_dir + s5_filt_ortho)
 print ("-----------------------------")
@@ -127,7 +127,7 @@ filtered_sept12_orthodb.get_unique_species()
 print ('Size db: ', filtered_sept12_orthodb.size)
 #2) filter by genome duplication issues - removing shorter orthologs from a species which align highly to a longer one
 fragmented_filtered_dict = genome_fragment_filter(filtered_sept12_orthodb)
-save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept12_retain_all.fasta')
+save_db_fasta(fragmented_filtered_dict, fasta_dir + 'sept12_retain_all.fasta', only_single = False)
 all_options_stockholm_msa_generation(fasta_dir + s12, fasta_dir + 'sept12_retain_all.fasta', msas +'sept12_retain_all/')
 
 #print ("multi-alignment filter - check if it's an issue (if it is, implement this....")

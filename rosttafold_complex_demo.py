@@ -35,7 +35,7 @@ print ('Size db: ', filtered_P0AAV4_orthodb.size)
 #2) filter by genome duplication issues - removing shorter orthologs from a species which align highly to a longer one
 fragmented_filtered_dict = genome_fragment_filter(filtered_P0AAV4_orthodb)
 #save filtered db
-save_db_fasta(fragmented_filtered_dict, fasta_dir + 'P0AAV4_retain_all.fasta')
+save_db_fasta(fragmented_filtered_dict, fasta_dir + 'P0AAV4_retain_all.fasta', only_single = False)
 #print ("multi-alignment filter - check if it's an issue (if it is, implement this....")
 #region_merge_filter(fragmented_filtered_dict, fasta_dir + P0AAV4_filt_ortho)
 print ("-----------------------------")
@@ -63,7 +63,7 @@ print ('Size db: ', filtered_P75745_orthodb.size)
 #2) filter by genome duplication issues - removing shorter orthologs from a species which align highly to a longer one
 fragmented_filtered_dict = genome_fragment_filter(filtered_P75745_orthodb)
 #save filtered db
-save_db_fasta(fragmented_filtered_dict, fasta_dir + 'P75745_retain_all.fasta')
+save_db_fasta(fragmented_filtered_dict, fasta_dir + 'P75745_retain_all.fasta', only_single = False)
 #print ("multi-alignment filter - check if it's an issue (if it is, implement this....")
 #region_merge_filter(fragmented_filtered_dict, fasta_dir + P75745_filt_ortho)
 print ("-----------------------------")

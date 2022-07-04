@@ -139,4 +139,35 @@ def run_blastp_species_v_singles(species_id, single_family_fasta, ortholog_db, o
     frame_id90 = frame_id90.sort_values(by = 'id_90', ascending= False)
     return frame_id90
 
+def run_blastp_target_v_isoforms(list_orthos_to_blast, orig_fasta_name, ortholog_db):
+    #make a temp fasta and align it with itself with blastp
+    dummy_list = []
+    ids = []
+    lens = []
+    seqs = []
+    if not os.path.isdir('./blastp_outputs/'):
+        os.mkdir('./blastp_outputs')
 
+    if not os.path.isdir('./single_family_fastas/'):
+        os.mkdir('./single_family_fastas')
+
+    for ortho in list_orthos_to_blast:
+        dummy_list.append(SeqRecord(Seq(ortho.sequence),
+                   id=ortho.oma_id))
+        ids.append(ortho.oma_id)
+        lens.append(len(ortho.sequence))
+        seqs.append(ortho.sequence)
+    SeqIO.write(dummy_list, "./single_family_fastas/isoforms.fasta", "fasta")
+
+    #running blastp on orig vs the family to see if there are diff overlap regions
+    output = \
+    NcbiblastpCommandline(query=orig_fasta_name, subject="./single_family_fastas/isoforms.fasta", out='./blastp_outputs/isoform_overlaps.tab', outfmt=6)()[0]
+
+    cols = ['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue',
+            'bitscore']
+    output = pd.read_csv('./blastp_outputs/isoform_overlaps.tab', names = cols, sep = "\t")
+    #drop smaller subalignmnets produced by blastp for the longest alignment possible for the ortholog seq
+    output = output.sort_values(by = ['evalue'], ascending=True).drop_duplicates('sseqid').sort_index()
+    s_len_df = pd.DataFrame({'sseqid':ids, 's_seq_len':lens, 's_seq': seqs})
+    output = output.merge(s_len_df, on ='sseqid', how = 'left')
+    return output

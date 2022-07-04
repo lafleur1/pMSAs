@@ -153,12 +153,16 @@ def region_merge_filter(spec_dict, target_fasta_name):
     #merge proteins into one
     print ("Orthologs to merge: ", len(merged_pairs))
 
-def save_db_fasta(db_dict, savename):
-    #generate a fasta of every single copy HOG sequence for ortholog selection per species
+def save_db_fasta(db_dict, savename, only_single = True):
+    #generate a fasta of orthologs per species
     #use seqrecord option to maintain all species info
     dummy_list = []
     for family in db_dict:
-        if len(db_dict[family]) == 1:
+        if only_single: # == 'single':
+            if len(db_dict[family]) == 1:
+                for ortho in db_dict[family]:
+                    dummy_list.append(ortho.return_seqrecord())
+        else:
             for ortho in db_dict[family]:
                 dummy_list.append(ortho.return_seqrecord())
     SeqIO.write(dummy_list, savename, "fasta")
