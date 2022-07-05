@@ -54,6 +54,9 @@ class ortholog_database:
             if len(self.species_other_dict[key]) == 1:
                 self.single_orthologs_per_species_dict[key] = self.species_other_dict[key]
         self.size = sum([len(self.species_other_dict[x]) for x in self.species_other_dict])
+        self.ref_isoforms_list = []#[x.oma_id for x in self.species_other_dict[y] for y in self.species_other_dict if x.has_isoform]
+        self.update_reference_isoforms()
+
 
     def get_unique_species(self):
         print ('number spec: ', len(self.species_other_dict))
@@ -62,6 +65,12 @@ class ortholog_database:
     def get_oma_species(self):
         return list(self.species_other_dict.keys())
 
+    def update_reference_isoforms(self):
+        #updates list of all refernece isoforms in the db
+        self.ref_isoforms_list = []
+        for spec in self.species_other_dict:
+            self.ref_isoforms_list = self.ref_isoforms_list + [x.ref_iso for x in self.species_other_dict[spec] if x.has_isoform]
+        self.ref_isoforms_list = list(set(self.ref_isoforms_list))
 
 def genome_fragment_filter(filtered_sept1_orthodb):
 
@@ -82,6 +91,8 @@ def genome_fragment_filter(filtered_sept1_orthodb):
 
     print('start filtering....')
     for mult_key in species_mult_entries:
+        #print (mult_key)
+        #print ( [x.oma_id for x in filtered_sept1_orthodb.species_other_dict[mult_key]])
         outputs = run_blastp_all_v_all(mult_key, filtered_sept1_orthodb.species_other_dict)
         if outputs[(outputs.pident >= 95) & (outputs.length >= 0.8 * outputs.s_seq_len)].shape[0] > 0:
             # print (outputs[(outputs.pident >= 95) & (outputs.length >= 0.8 * outputs.s_seq_len)]) #shorter is redundant - add strip list

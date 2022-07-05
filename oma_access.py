@@ -61,11 +61,14 @@ def reblast_and_filter_isoforms_fasta(full_isoform_db, orig_fasta_name, new_fast
     #reblast and filter each family against the isoform - if one of the isoforms is higher than the orig, keep that instead
     fasta_lines = []
     species = full_isoform_db.get_oma_species()
+    full_isoform_db.update_reference_isoforms()
     select_new_isoforms = 0
     num_isoforms2 = 0
+    replaced_isoforms = []
     for spec in species:
         #is isoform if they have same cannonical id for the othorlogs
         iso_organizer2 = {}
+        #print (spec)
         for ortho in full_isoform_db.species_other_dict[spec]:
             if ortho.has_isoform:
                 num_isoforms2 += 1
@@ -73,8 +76,11 @@ def reblast_and_filter_isoforms_fasta(full_isoform_db, orig_fasta_name, new_fast
                     iso_organizer2[ortho.ref_iso].append(ortho.oma_id)
                 else:
                     iso_organizer2[ortho.ref_iso] = [ortho.oma_id]
-            else:
+            elif ortho.oma_id not in full_isoform_db.ref_isoforms_list:
                 fasta_lines.append(ortho.return_seqrecord())
+            #elif ortho.oma_id in full_isoform_db.ref_isoforms_list:
+                #print ("ref iso? ")
+                #print (ortho.oma_id)
 
         for ref_isoform in iso_organizer2:
             ids_list = [ref_isoform] + iso_organizer2[ref_isoform] #all isoforms ot get from the species list
@@ -93,11 +99,13 @@ def reblast_and_filter_isoforms_fasta(full_isoform_db, orig_fasta_name, new_fast
                 print ('-----------------------')
                 #replace reference protein
                 fasta_lines.append(stupid_lookup[blast_results.iloc[0].sseqid].return_seqrecord())
+                replaced_isoforms.append(stupid_lookup[blast_results.iloc[0].sseqid].return_seqrecord())
             else:
                 fasta_lines.append(stupid_lookup[ref_isoform].return_seqrecord())
 
     #make new fastadb with the replaced isoforms
     SeqIO.write(fasta_lines, new_fasta_db_name, "fasta")
+    SeqIO.write(replaced_isoforms, new_fasta_db_name.replace('.fasta', '_replacement_isoforms.fasta'), "fasta")
 
     print ('Total proteins: ', full_isoform_db.size, " pros with isoforms: ", num_isoforms2, " difference isoform selected for db ", select_new_isoforms)
 
@@ -129,7 +137,7 @@ def get_all_oma_proteomes():
     os.remove("oma-seqs.fa.gz")
 
 
-def break_up_into_proteoms():
+def break_up_into_proteomes():
     #assumes you have oma-seqs.fa unzipped in this directory
     #the master proteome list is organized by species id
 

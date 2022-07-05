@@ -149,7 +149,6 @@ all_options_stockholm_msa_generation(fasta_dir + s12, fasta_dir + 'sept12_filt_i
 print ("-----------------------------")
 
 
-
 #reformat all sto files to a3m files, filter out high gap lines
 proteins = ['sept1', 'sept5', 'sept12']
 for protein in proteins:
