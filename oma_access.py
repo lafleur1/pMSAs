@@ -89,7 +89,7 @@ def reblast_and_filter_isoforms_fasta(full_isoform_db, orig_fasta_name, new_fast
                 select_new_isoforms +=1
                 print (ref_isoform)
                 print (blast_results[['sseqid', 'pident', 'length', 's_seq_len', 'evalue', 'bitscore']])
-                print (blast_results.evalue.to_list())
+                #print (blast_results.evalue.to_list())
                 print ('-----------------------')
                 #replace reference protein
                 fasta_lines.append(stupid_lookup[blast_results.iloc[0].sseqid].return_seqrecord())

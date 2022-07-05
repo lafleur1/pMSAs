@@ -27,7 +27,7 @@ s1ds_filt_ortho =  's1ds_isoform_filt_orthologs.fasta'
 
 filtered_sept1_orthodb = ortholog_database(fasta_dir + s1_filt_ortho) #created in original septin complex demo
 species = filtered_sept1_orthodb.get_oma_species()
-retrieve_all_oma_isoforms(filtered_sept1_orthodb, fasta_dir + s1_filt_ortho_w_iso) #get all annotated isoforms of ortholog seqeuences where relevant
+#retrieve_all_oma_isoforms(filtered_sept1_orthodb, fasta_dir + s1_filt_ortho_w_iso) #get all annotated isoforms of ortholog seqeuences where relevant
 
 #count diffs in size
 orig_filtered = ortholog_database(fasta_dir + s1_filt_ortho)
@@ -35,7 +35,7 @@ print ('No isoform orthologs: ', orig_filtered.size)
 #load isoform db
 all_isoforms_orthologs_septin1 = ortholog_database(fasta_dir + s1_filt_ortho_w_iso)
 print ('Orthologs + isoforms: ', all_isoforms_orthologs_septin1.size)
-#for every ortholog with a isoform, run pBLAST with the isoform sequence vs original sequence and its isoforms and see if a better match is possible
+#for every ortholog with a isoform, run pBLAST with the isoform sequence vs original sequence and its isoforms and see if a better match is possible (by evalyue, bit score)
 reblast_and_filter_isoforms_fasta(all_isoforms_orthologs_septin1, fasta_dir + s1ds, fasta_dir +s1ds_filt_ortho)
 
 #now do the same steps as previous
