@@ -72,8 +72,7 @@ def construct_pmsa(a3m_file_name1, a3m_file_name2, pmsa_name):
 
     #save wt string for robetta input
     #print (str(wt_one.seq) + "/" + str(wt_two.seq))
-    with open(pmsa_name.replace('.a3m', '_wt.txt'), 'w') as f:
-        f.write(str(wt_one.seq) + "/" + str(wt_two.seq))
+
     dummy_seq_one = '-' * len(wt_one.seq)
     dummy_seq_two = '-' * len(wt_two.seq)
 

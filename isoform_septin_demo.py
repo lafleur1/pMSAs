@@ -83,3 +83,7 @@ for alignment_folder in ['_retain_all', '_filt_id90_5', '_filt_id90_1', '_filt_i
     output_folder = msas + 'sept12_sept1ds_complex' + alignment_folder +'/'
     generate_all_pmsa_pairs(septin12_folder, septin1ds_folder, output_folder)
     print ("------------------")
+
+#make wt input for robetta (if not running rosettafold locally)
+with open(pmsa_name.replace('.a3m', '_wt.txt'), 'w') as f:
+    f.write(str(wt_one.seq) + "/" + str(wt_two.seq))
