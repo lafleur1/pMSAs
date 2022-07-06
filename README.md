@@ -1,4 +1,5 @@
-# paired multiple sequence alignments (pMSAs)
+
+**ALY**gner of **S**everal **S**equences by **A**lyssa (**ALYSSA**) 
 
 Summary: 
 
