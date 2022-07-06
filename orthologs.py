@@ -62,6 +62,7 @@ class ortholog_database:
         print ('number spec: ', len(self.species_other_dict))
         print ("with 1 ortho: ", len(self.single_orthologs_per_species_dict))
 
+
     def get_oma_species(self):
         return list(self.species_other_dict.keys())
 

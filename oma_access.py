@@ -173,3 +173,4 @@ def break_up_into_proteomes():
     print('writing out genome for ', currnet_spec_id, ' with ', len(current_records), ' proteins ')
     SeqIO.write(current_records, current_file_name, 'fasta')
 
+

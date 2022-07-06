@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from itertools import chain
 
 
+
 def convert_sto_to_a3m(sto_file_name, a3m_file_name, path_to_reformat = "~/hh-suite/scripts/reformat.pl" ):
     #use hhsuite reformat.pl to transform it to a3m format
     os.system(path_to_reformat + " sto a3m " + sto_file_name + " " + a3m_file_name)
