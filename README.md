@@ -1,4 +1,4 @@
-# **ALY**gner of **S**everal **S**equences by **A**lyssa (**ALYSSA**) 
+# *ALY*gner of *S*everal *S*equences by *A*lyssa (*ALYSSA*) 
 
 Summary: 
 
